@@ -175,11 +175,7 @@ end
 
 
 if Direction == "east" and tarZ > curZ then
-    if curZ < 0 then
-    turtle.turnLeft()
-    else
     turtle.turnRight()
-    end
 elseif Direction == "east" and tarZ < curZ then
     turtle.turnLeft()
 elseif Direction == "west" and  tarZ > curZ then
