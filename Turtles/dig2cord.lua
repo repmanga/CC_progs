@@ -166,7 +166,7 @@ elseif StartDirection == "north" and tarX > curX then
     --target on East
 end
 curX, curY, curZ = gps.locate()
-for p = 1, math.abs(curX - tarX)), 1 do
+for p = 1, math.abs(curX - tarX), 1 do
     chkBLK()
     chkFuel()
     dig()
