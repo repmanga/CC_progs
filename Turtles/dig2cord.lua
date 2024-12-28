@@ -166,7 +166,7 @@ elseif StartDirection == "north" and tarX > curX then
     --target on East
 end
 curX, curY, curZ = gps.locate()
-for p = 1, math.abs(math.abs(curX) - math.abs(tarX)), 1 do
+for p = 1, math.abs(curX - tarX)), 1 do
     chkBLK()
     chkFuel()
     dig()
@@ -175,7 +175,11 @@ end
 
 
 if Direction == "east" and tarZ > curZ then
+    if curZ < 0 then
+    turtle.turnLeft()
+    else
     turtle.turnRight()
+    end
 elseif Direction == "east" and tarZ < curZ then
     turtle.turnLeft()
 elseif Direction == "west" and  tarZ > curZ then
@@ -185,7 +189,7 @@ elseif Direction == "west" and tarZ < curZ then
 end
 
 curX, curY, curZ = gps.locate()
-for p = 1, math.abs(math.abs(curZ) - math.abs(tarZ)), 1 do
+for p = 1, math.abs(curZ - tarZ), 1 do
     chkBLK()
     chkFuel()
     dig()
