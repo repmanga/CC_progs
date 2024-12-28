@@ -99,13 +99,13 @@ function dig()
             turtle.forward()
             turtle.digUp()
             turtle.placeDown()
-            turtle.place()
             --turtle.digDown()
             --if turtle.getItemCount(j+1) > 1 then
             --    turtle.placeDown()
             --end
             --gravelD3stroy()
         end
+        turtle.place()
         if dirRL == false then
             turtle.turnRight()
         end
