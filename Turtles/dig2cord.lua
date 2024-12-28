@@ -1,20 +1,7 @@
-print("Specify target length")
-local length = tonumber(read())
 k = 2
---print("Specify target height")
---local height = tonumber(read())
 dirRL, dirUD = true, true -- true - normal, false - opposite
 print("Specify target width")
 local width = tonumber(read())
-
-if length < 1 then
-    print("Length must be at least 1 block")
-    errorhandler()
-end
-if length < 1 then
-    print("Length must be at least 1 block")
-    errorhandler()
-end
 
 
 --if width < 2 then
@@ -24,8 +11,7 @@ end
 
 function errorhandler()
     print("Error has occured!")
-    while true do
-        
+    while true do  
     end
 end
 
@@ -99,13 +85,13 @@ function dig()
             turtle.forward()
             turtle.digUp()
             turtle.placeDown()
-            turtle.place()
             --turtle.digDown()
             --if turtle.getItemCount(j+1) > 1 then
             --    turtle.placeDown()
             --end
             --gravelD3stroy()
         end
+        turtle.place()
         if dirRL == false then
             turtle.turnRight()
         end
@@ -117,10 +103,100 @@ function dig()
     gravelD3stroy()
 end
 
-for i = 1, length, 1 do
-    chkFuel()
+print("Set target x")
+tarX = tonumber(read())
+print("Set target Z")
+tarZ = tonumber(read())
+
+
+function gpsNav(tarX, tarY, tarZ)
+local function turnAround()
+    turtle.turnLeft()
+    turtle.turnLeft()
+end
+local x, y, z,curX, curY, curZ, StartDirection, Direction
+x,y,z = gps.locate()
+print(x)
+print(y)
+print(z)
+
+turtle.forward()
+curX, curY, curZ = gps.locate()
+
+if curX > x then
+    StartDirection = "east"
+elseif curX < x then
+    StartDirection = "west"
+elseif curZ > z then
+    StartDirection = "south"
+elseif curZ < z then
+    StartDirection = "north"
+end
+
+
+if StartDirection == "east" and tarX < curX then
+    turnAround()
+    Direction = "west"
+    --target on West
+elseif  StartDirection == "east" and tarX > curX then
+    --target on East
+    Direction = "east"
+elseif  StartDirection == "west" and tarX < curX then
+    Direction = "West"
+    --target on West
+elseif  StartDirection == "west" and tarX > curX then
+    turnAround()
+    Direction = "east"
+    --target on East
+elseif StartDirection == "south" and tarX < curX then
+    turtle.turnRight()
+    Direction = "west"
+    --target on West
+elseif StartDirection == "south" and tarX > curX then
+    turtle.turnLeft()
+    Direction = "east"
+    --target on East
+elseif StartDirection == "north" and tarX < curX then
+    turtle.turnLeft()
+    Direction = "west"
+    --target on West
+elseif StartDirection == "north" and tarX > curX then
+    turtle.turnRight()
+    Direction = "east"
+    --target on East
+end
+curX, curY, curZ = gps.locate()
+for p = 1, math.abs(math.abs(curX) - math.abs(tarX)), 1 do
     chkBLK()
-    gravelD3stroy()
+    chkFuel()
     dig()
 end
-print("Job ended")
+
+
+
+if Direction == "east" and tarZ > curZ then
+    if curZ < 0 then
+    turtle.turnLeft()
+    else
+    turtle.turnRight()
+    end
+elseif Direction == "east" and tarZ < curZ then
+    turtle.turnLeft()
+elseif Direction == "west" and  tarZ > curZ then
+    turtle.turnLeft()
+elseif Direction == "west" and tarZ < curZ then
+    turtle.turnRight()
+end
+
+curX, curY, curZ = gps.locate()
+for p = 1, math.abs(math.abs(curZ) - math.abs(tarZ)), 1 do
+    chkBLK()
+    chkFuel()
+    dig()
+end
+
+end
+
+gpsNav(tarX, tarY, tarZ)
+
+print("Job done")
