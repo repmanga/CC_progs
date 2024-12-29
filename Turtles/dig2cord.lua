@@ -29,9 +29,11 @@ function gravelD3stroy()
 end
 
 function chkBLK()
+    print("chkBLK invoked!")
     local attempts = 0
-    if turtle.getItemCount(k) < 5 then
-        while turtle.getItemCount(k) < 5 do
+    turtle.select(k)
+    if turtle.getItemCount(k) <= 7 then
+        while turtle.getItemCount(k) <= 7 do
             turtle.select(k)
             if k < 16 then
                 k = k + 1
@@ -52,6 +54,7 @@ function chkBLK()
 end
 
 function chkFuel()
+    print("chkBLK invoked!")
     while turtle.getFuelLevel() < 10 do
         for b = 1, 15, 1 do
             turtle.select(b)
@@ -70,26 +73,26 @@ function dig()
     turtle.forward()
     gravelD3stroy()
         if dirRL == true then
-            turtle.turnLeft()
-            turtle.place()
-            turtle.turnRight()
-            turtle.turnRight()
+        turtle.turnLeft()
+        turtle.place()
+        turtle.turnRight()
+        turtle.turnRight()
         end
         if dirRL == false then
-            turtle.turnRight()
-            turtle.place()
-            turtle.turnLeft()
-            turtle.turnLeft()
+        turtle.turnRight()
+        turtle.place()
+        turtle.turnLeft()
+        turtle.turnLeft()
         end
         for j = 1, width-1, 1 do
-            gravelD3stroy()
-            turtle.dig()
-            turtle.digUp()
+        gravelD3stroy()
+        turtle.dig()
+        turtle.digUp()
             --turtle.digDown()
-            turtle.placeDown()
-            turtle.forward()
-            turtle.digUp()
-            turtle.placeDown()
+        turtle.placeDown()
+        turtle.forward()
+        turtle.digUp()
+        turtle.placeDown()
             --turtle.digDown()
             --if turtle.getItemCount(j+1) > 1 then
             --    turtle.placeDown()
@@ -98,10 +101,10 @@ function dig()
         end
         turtle.place()
         if dirRL == false then
-            turtle.turnRight()
+        turtle.turnRight()
         end
         if dirRL == true then
-            turtle.turnLeft()
+        turtle.turnLeft()
         end
         dirRL = not dirRL
         dirUD = not dirUD
