@@ -1,13 +1,13 @@
 k = 2
-dirRL, dirUD = true, true -- true - normal, false - opposite
-print("Specify target width")
+dirRL = true -- true - normal, false - opposite
+print("Specify tunnel width")
 local width = tonumber(read())
 
 
---if width < 2 then
---    print("Width must be at least 2 block")
---    errorhandler()
---end
+if width < 1 then
+    print("Width must be at least 1 block")
+    errorhandler()
+end
 
 function errorhandler()
     print("Error has occured!")
@@ -88,16 +88,10 @@ function dig()
         gravelD3stroy()
         turtle.dig()
         turtle.digUp()
-            --turtle.digDown()
         turtle.placeDown()
         turtle.forward()
         turtle.digUp()
         turtle.placeDown()
-            --turtle.digDown()
-            --if turtle.getItemCount(j+1) > 1 then
-            --    turtle.placeDown()
-            --end
-            --gravelD3stroy()
         end
         turtle.place()
         if dirRL == false then
