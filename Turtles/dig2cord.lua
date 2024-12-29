@@ -70,12 +70,17 @@ function dig()
     turtle.forward()
     gravelD3stroy()
         if dirRL == true then
+            turtle.turnLeft()
+            turtle.place()
+            turtle.turnRight()
             turtle.turnRight()
         end
         if dirRL == false then
+            turtle.turnRight()
+            turtle.place()
+            turtle.turnLeft()
             turtle.turnLeft()
         end
-            turtle.select(k)
         for j = 1, width-1, 1 do
             gravelD3stroy()
             turtle.dig()
@@ -175,11 +180,7 @@ end
 
 
 if Direction == "east" and tarZ > curZ then
-    if curZ < 0 then
-    turtle.turnLeft()
-    else
     turtle.turnRight()
-    end
 elseif Direction == "east" and tarZ < curZ then
     turtle.turnLeft()
 elseif Direction == "west" and  tarZ > curZ then
