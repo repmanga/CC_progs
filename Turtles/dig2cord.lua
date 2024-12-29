@@ -54,7 +54,7 @@ function chkBLK()
 end
 
 function chkFuel()
-    print("chkBLK invoked!")
+    --print("chkBLK invoked!")
     while turtle.getFuelLevel() < 10 do
         for b = 1, 15, 1 do
             turtle.select(b)
